@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>行业资讯 · 条码科技有限公司</title>
+<meta name="description" content="条码科技有限公司官方资讯，最新条码政策解读、办理指南、行业动态。">
+<style>
+  :root {
+    --primary: #1565C0;
+    --primary-light: #1976D2;
+    --primary-dark: #0D47A1;
+    --accent: #FF6F00;
+    --accent-light: #FF8F00;
+    --bg: #FAFBFD;
+    --bg2: #F0F4FA;
+    --white: #FFFFFF;
+    --text: #1A2340;
+    --text2: #455472;
+    --text3: #7A8BAA;
+    --border: #D9E4F5;
+    --success: #2E7D32;
+    --shadow: 0 4px 24px rgba(21,101,192,0.10);
+    --shadow2: 0 8px 40px rgba(21,101,192,0.16);
+    --radius: 12px;
+    --radius2: 20px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "PingFang SC","Microsoft YaHei","Helvetica Neue",sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+  /* ====== HEADER ====== */
+  #header {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    background: rgba(255,255,255,0.97);
+    border-bottom: 1.5px solid var(--border);
+    box-shadow: 0 2px 16px rgba(21,101,192,0.07);
+  }
+  .header-inner {
+    max-width: 1100px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 24px; height: 64px;
+  }
+  .logo {
+    display: flex; align-items: center; gap: 10px;
+    text-decoration: none;
+  }
+  .logo-icon {
+    width: 38px; height: 38px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary) 0%, #42A5F5 100%);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .logo-icon svg { width: 22px; height: 22px; }
+  .logo-text { font-size: 18px; font-weight: 700; color: var(--primary); letter-spacing: 0.5px; }
+  .logo-sub { font-size: 11px; color: var(--text3); display: block; line-height: 1.2; }
+
+  nav { display: flex; align-items: center; gap: 4px; }
+  nav a {
+    text-decoration: none; color: var(--text2); font-size: 14px;
+    padding: 6px 14px; border-radius: 8px; transition: all 0.2s;
+    white-space: nowrap;
+  }
+  nav a:hover { background: #E3EEFF; color: var(--primary); font-weight: 600; }
+  nav a.active { background: #E3EEFF; color: var(--primary); font-weight: 600; }
+
+  .header-contact {
+    display: flex; align-items: center; gap: 12px; flex-shrink: 0;
+  }
+  .header-tel {
+    display: flex; align-items: center; gap: 6px;
+    color: var(--primary); font-size: 15px; font-weight: 700;
+    text-decoration: none;
+  }
+  .btn-consult {
+    background: linear-gradient(135deg, var(--primary) 0%, #42A5F5 100%);
+    color: #fff; border: none; border-radius: 24px;
+    padding: 8px 22px; font-size: 14px; font-weight: 600;
+    cursor: pointer; transition: opacity 0.2s; text-decoration: none;
+    white-space: nowrap;
+  }
+  .btn-consult:hover { opacity: 0.88; }
+
+  @media (max-width: 768px) {
+    nav { gap: 0; }
+    nav a { font-size: 12px; padding: 5px 8px; }
+    .header-tel { font-size: 13px; }
+    .btn-consult { padding: 6px 14px; font-size: 12px; }
+  }
+
+  /* ====== PAGE CONTENT ====== */
+  .page-content { padding: 120px 24px 80px; min-height: 100vh; }
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .page-header { text-align: center; margin-bottom: 48px; }
+  .page-header h1 { font-size: 32px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+  .page-header h1 em { color: var(--primary); font-style: normal; }
+  .page-header p { font-size: 15px; color: var(--text2); margin-top: 8px; }
+  .divider {
+    width: 52px; height: 4px; border-radius: 2px;
+    background: linear-gradient(90deg, var(--primary) 0%, #42A5F5 100%);
+    margin: 12px auto 0;
+  }
+
+  /* ====== NEWS LIST ====== */
+  .news-list { display: flex; flex-direction: column; gap: 20px; }
+
+  .news-item {
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); overflow: hidden;
+    display: flex; transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .news-item:hover { transform: translateY(-2px); box-shadow: var(--shadow2); }
+
+  .news-item .news-thumb {
+    flex: 0 0 240px; background: linear-gradient(135deg, #1565C0 0%, #42A5F5 100%);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 42px; color: rgba(255,255,255,0.25); position: relative;
+    overflow: hidden;
+  }
+  .news-item .news-thumb::after {
+    content: ""; position: absolute; inset: 0;
+    background: linear-gradient(transparent 60%, rgba(0,0,0,0.08));
+  }
+
+  .news-item .news-info { flex: 1; padding: 24px 28px; display: flex; flex-direction: column; }
+
+  .news-item .news-meta {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 10px;
+  }
+  .news-item .news-cat {
+    font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 10px;
+  }
+  .news-item .news-cat.policy { background: #FFF3E0; color: #E65100; }
+  .news-item .news-cat.guide { background: #E3EEFF; color: var(--primary); }
+  .news-item .news-cat.notice { background: #FCE4EC; color: #C62828; }
+  .news-item .news-cat.case { background: #E8F5E9; color: var(--success); }
+  .news-item .news-cat.company { background: #F3E5F5; color: #7B1FA2; }
+
+  .news-item .news-date { font-size: 12px; color: var(--text3); }
+
+  .news-item h3 {
+    font-size: 18px; font-weight: 700; color: var(--text);
+    line-height: 1.4; margin-bottom: 10px;
+  }
+  .news-item p {
+    font-size: 14px; color: var(--text2); line-height: 1.6;
+    flex: 1; margin-bottom: 14px;
+  }
+  .news-item .read-more {
+    font-size: 13px; font-weight: 600; color: var(--primary);
+    text-decoration: none; display: inline-flex; align-items: center; gap: 4px;
+    align-self: flex-start; transition: gap 0.2s;
+  }
+  .news-item .read-more:hover { gap: 8px; }
+
+  /* ====== SIDEBAR ====== */
+  .news-layout { display: flex; gap: 32px; }
+  .news-main { flex: 1; min-width: 0; }
+  .news-sidebar { flex: 0 0 260px; }
+
+  .sidebar-card {
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 22px 20px;
+    margin-bottom: 20px;
+  }
+  .sidebar-card h4 {
+    font-size: 15px; font-weight: 700; color: var(--text);
+    margin-bottom: 14px; padding-bottom: 10px;
+    border-bottom: 2px solid var(--bg2);
+  }
+  .sidebar-card ul { list-style: none; }
+  .sidebar-card ul li {
+    padding: 8px 0; border-bottom: 1px solid var(--bg2);
+  }
+  .sidebar-card ul li:last-child { border-bottom: none; }
+  .sidebar-card ul li a {
+    font-size: 13px; color: var(--text2); text-decoration: none;
+    display: block; transition: color 0.2s;
+  }
+  .sidebar-card ul li a:hover { color: var(--primary); }
+
+  .sidebar-card .tag-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .sidebar-card .tag-cloud a {
+    font-size: 12px; padding: 5px 12px; border-radius: 16px;
+    background: var(--bg2); color: var(--text2); text-decoration: none;
+    transition: all 0.2s;
+  }
+  .sidebar-card .tag-cloud a:hover { background: var(--primary); color: #fff; }
+
+  .sidebar-card .hot-item {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 10px 0; border-bottom: 1px solid var(--bg2);
+  }
+  .sidebar-card .hot-item:last-child { border-bottom: none; }
+  .sidebar-card .hot-item .hot-num {
+    flex-shrink: 0; width: 22px; height: 22px; border-radius: 4px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 800; color: #fff;
+  }
+  .sidebar-card .hot-item .hot-num.top1 { background: #E53935; }
+  .sidebar-card .hot-item .hot-num.top2 { background: var(--accent); }
+  .sidebar-card .hot-item .hot-num.top3 { background: #F9A825; }
+  .sidebar-card .hot-item .hot-num.top { background: var(--text3); }
+  .sidebar-card .hot-item a {
+    font-size: 13px; color: var(--text2); text-decoration: none;
+    line-height: 1.4;
+  }
+  .sidebar-card .hot-item a:hover { color: var(--primary); }
+
+  @media (max-width: 768px) {
+    .page-content { padding: 100px 16px 60px; }
+    .news-layout { flex-direction: column; }
+    .news-sidebar { flex: none; }
+    .news-item { flex-direction: column; }
+    .news-item .news-thumb { flex: none; height: 160px; }
+    .news-item .news-info { padding: 16px 18px; }
+    .news-item h3 { font-size: 16px; }
+  }
+
+  /* ====== FOOTER ====== */
+  footer {
+    background: var(--text); color: rgba(255,255,255,0.55);
+    text-align: center; padding: 40px 24px;
+    font-size: 13px;
+  }
+  footer .f-name {
+    font-size: 18px; font-weight: 700; color: rgba(255,255,255,0.85);
+    margin-bottom: 8px;
+  }
+  footer a { color: rgba(255,255,255,0.55); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<!-- ====== HEADER ====== -->
+<header id="header">
+  <div class="header-inner">
+    <a href="index.html" class="logo">
+      <div class="logo-icon">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="4" width="2" height="16" fill="white"/>
+          <rect x="5" y="4" width="1" height="16" fill="white"/>
+          <rect x="7" y="4" width="3" height="16" fill="white"/>
+          <rect x="11" y="4" width="1" height="16" fill="white"/>
+          <rect x="13" y="4" width="2" height="16" fill="white"/>
+          <rect x="16" y="4" width="1" height="16" fill="white"/>
+          <rect x="18" y="4" width="2" height="16" fill="white"/>
+          <rect x="21" y="4" width="1" height="16" fill="white"/>
+        </svg>
+      </div>
+      <div>
+        <span class="logo-text">条码科技有限公司</span>
+        <span class="logo-sub">专业商品条码办理机构</span>
+      </div>
+    </a>
+    <nav>
+      <a href="index.html">首页</a>
+      <a href="index.html#register">条码注册</a>
+      <a href="index.html#renewal">续展/变更</a>
+      <a href="index.html#generator">条码生成</a>
+      <a href="index.html#qrcode">产品二维码</a>
+      <a href="news.html" class="active">行业资讯</a>
+      <a href="index.html#contact">联系我们</a>
+    </nav>
+    <div class="header-contact">
+      <a class="header-tel" href="tel:13X00000000">
+        <span>📞</span><span>13X-XXXX-XXXX</span>
+      </a>
+      <a href="index.html#contact" class="btn-consult">💬 咨询</a>
+    </div>
+  </div>
+</header>
+
+<!-- ====== PAGE CONTENT ====== -->
+<div class="page-content">
+  <div class="container">
+    <div class="page-header">
+      <h1><em>资讯</em>中心</h1>
+      <div class="divider"></div>
+      <p>条码科技有限公司官方发布 · 政策解读、办理指南、行业动态一手掌握</p>
+    </div>
+
+    <div class="news-layout">
+      <!-- 主列表 -->
+      <div class="news-main">
+        <div class="news-list">
+
+          <div class="news-item">
+            <div class="news-thumb">📋</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat notice">公司公告</span>
+                <span class="news-date">2026-06-15</span>
+              </div>
+              <h3>关于2026年商品条码续展办理的温馨提示</h3>
+              <p>我司提醒广大客户：商品条码有效期为2年，到期前3个月需办理续展。为保障条码持续有效，请及时联系专属客服办理续展手续，避免因条码失效影响产品正常流通与销售。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-thumb">🎁</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat notice">公司公告</span>
+                <span class="news-date">2026-06-10</span>
+              </div>
+              <h3>限时优惠活动：前100名申请客户赠送1000个条形码+产品通报</h3>
+              <p>为回馈新老客户，即日起前100名办理商品条码注册的客户，将额外获赠1000个条形码及产品通报服务。活动名额有限，先到先得，详情请咨询我司客服。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-thumb">📰</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat policy">政策解读</span>
+                <span class="news-date">2026-06-08</span>
+              </div>
+              <h3>GS1全球标准升级：二维条码将逐步推广应用</h3>
+              <p>GS1国际组织宣布2027年全面推广二维条码标准，届时消费者扫码不仅可获取产品信息，还能查看溯源、批次等更多数据。我司已提前完成技术储备，可为客户提供二维条码定制服务。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-thumb">📊</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat guide">办理指南</span>
+                <span class="news-date">2026-06-02</span>
+              </div>
+              <h3>电商平台入驻条码要求汇总：天猫、京东、拼多多篇</h3>
+              <p>近期各主流电商平台陆续强化商品条码合规要求，未办理正规条码的商品将面临下架风险。本文梳理各大平台最新条码入驻要求及办理流程，助力商家快速合规入驻。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-thumb">💡</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat guide">办理指南</span>
+                <span class="news-date">2026-05-28</span>
+              </div>
+              <h3>条码续展全攻略：提前3个月办理，避免条码失效</h3>
+              <p>商品条码有效期2年，到期需办理续展。我司为您梳理续展所需材料清单、办理流程、常见问题及注意事项，帮助您顺利完成条码续展，确保产品正常流通。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-thumb">🌿</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat case">客户案例</span>
+                <span class="news-date">2026-05-20</span>
+              </div>
+              <h3>贵州特色农产品条码全覆盖项目圆满完成</h3>
+              <p>我司配合贵州省农业部门推进农产品条码全覆盖工作，已为省内百余家农产品企业提供条码注册及产品信息化服务，助力"黔货出山"品牌战略实施。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-thumb">🌍</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat policy">政策解读</span>
+                <span class="news-date">2026-05-15</span>
+              </div>
+              <h3>出口企业注意：欧盟新规要求产品条码实现可追溯</h3>
+              <p>欧盟发布最新产品合规要求，从2026年第三季度起，出口至欧盟市场的产品必须实现条码可追溯。我司已为多家出口企业提供合规条码解决方案，欢迎咨询。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+          <div class="news-item">
+            <div class="news-thumb">🤝</div>
+            <div class="news-info">
+              <div class="news-meta">
+                <span class="news-cat company">企业动态</span>
+                <span class="news-date">2026-05-08</span>
+              </div>
+              <h3>条码科技有限公司荣获2025年度优秀条码代办机构称号</h3>
+              <p>我司凭借专业的服务品质、高效的办理速度和优质的客户口碑，荣获中国物品编码中心授予的"优秀条码代办服务机构"荣誉称号，这是对我司多年来专业服务的肯定。</p>
+              <a href="#" class="read-more">阅读全文 →</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- 侧边栏 -->
+      <div class="news-sidebar">
+        <div class="sidebar-card">
+          <h4>📂 资讯分类</h4>
+          <ul>
+            <li><a href="#">公司公告</a></li>
+            <li><a href="#">政策解读</a></li>
+            <li><a href="#">办理指南</a></li>
+            <li><a href="#">客户案例</a></li>
+            <li><a href="#">企业动态</a></li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>🔥 热门标签</h4>
+          <div class="tag-cloud">
+            <a href="#">条码续展</a>
+            <a href="#">商品条码</a>
+            <a href="#">电商入驻</a>
+            <a href="#">69码</a>
+            <a href="#">EAN-13</a>
+            <a href="#">条码注册</a>
+            <a href="#">出口合规</a>
+            <a href="#">二维条码</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card">
+          <h4>📈 热门阅读</h4>
+          <div class="hot-item">
+            <span class="hot-num top1">1</span>
+            <a href="#">条码续展全攻略：提前3个月办理</a>
+          </div>
+          <div class="hot-item">
+            <span class="hot-num top2">2</span>
+            <a href="#">限时优惠：前100名赠送1000条码</a>
+          </div>
+          <div class="hot-item">
+            <span class="hot-num top3">3</span>
+            <a href="#">电商平台入驻条码要求汇总</a>
+          </div>
+          <div class="hot-item">
+            <span class="hot-num top">4</span>
+            <a href="#">GS1全球标准升级解读</a>
+          </div>
+          <div class="hot-item">
+            <span class="hot-num top">5</span>
+            <a href="#">条码续展办理温馨提示</a>
+          </div>
+        </div>
+
+        <div class="sidebar-card" style="background: linear-gradient(135deg, var(--primary-dark), var(--primary)); color: #fff;">
+          <h4 style="color:#fff; border-bottom-color: rgba(255,255,255,0.2);">💬 联系我们</h4>
+          <p style="font-size:13px; margin-bottom:12px; opacity:0.9;">专业条码办理，一对一专属客服，快速下号！</p>
+          <a href="index.html#contact" style="display:block; text-align:center; background:#fff; color:var(--primary); padding:10px; border-radius:20px; text-decoration:none; font-weight:700; font-size:14px;">立即咨询 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ====== FOOTER ====== -->
+<footer>
+  <div class="f-name">条码科技有限公司</div>
+  <div>专业商品条码办理机构 · 条码注册 · 续展变更 · 条形码生成 · 产品二维码</div>
+  <div style="margin-top:8px;">
+    📞 <a href="tel:13X00000000">13X-XXXX-XXXX</a>
+    &nbsp;·&nbsp;
+    💬 微信：XXXXXXXXX
+    &nbsp;·&nbsp;
+    📍 贵州
+  </div>
+  <div style="margin-top:12px;opacity:0.4;">
+    © 2026 条码科技有限公司 版权所有
+  </div>
+</footer>
+
+</body>
+</html>
